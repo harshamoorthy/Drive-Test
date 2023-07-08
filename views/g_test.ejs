@@ -1,0 +1,156 @@
+<!-- Name: Harsha Vardhini Thirumoorthy -->
+<!-- Student Num: 8847377 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- ======= header ======= -->
+<%- include('layouts/header'); -%>
+
+  <body>
+    <!-- ======= navbar ======= -->
+    <%- include('layouts/navbar'); -%>
+
+      <main id="main">
+        <!-- ======= Cta Section ======= -->
+        <section id="cta" class="cta">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-9 text-center text-lg-start">
+                <h3>G TEST</h3>
+                <p>
+                  A Full G Licence to Drive a Car, Van or Small Truck. This test
+                  assesses more advanced driving skills, includes a highway
+                  component, and usually takes about 30 minutes. Eligibility one
+                  year G2 driver experience or 2 year foreign experience.
+                </p>
+              </div>
+              <div class="col-lg-3 cta-btn-container text-center">
+                <a class="cta-btn align-middle" href="#">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- End Cta Section -->
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+          <div class="container">
+            <div class="section-title">
+              <h2>you can Get the user details here</h2>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 mt-10 mt-lg-0 d-flex align-items-stretch">
+                <form action="/g_test" method="POST" role="form" class="g2_form">
+                  <div class="form-group mt-3">
+                    <label for="name">License Number</label>
+                    <input type="text" class="form-control" name="license" id="license" required />
+                  </div>
+                  <br />
+
+                  <div class="text-center">
+                    <button type="submit">Get User Details</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </section>
+        <section>
+
+          <div class="row info-box">
+
+            <div class="col-lg-12 mt-10 mt-lg-0 d-flex align-items-stretch justify-content-center flex-column">
+
+              <% if (typeof user !=='undefined' ) { %>
+                <h2 class="p-1 text-center">User Information</h2>
+                <form id="userForm" action="/updateCarDetails" method="POST" role="form" class="g2_form">
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="firstname">First Name</label>
+                      <input type="text" name="firstname" class="form-control gray" id="firstname"
+                        value=" <%= user.firstname %>" readonly>
+                    </div>
+                    <div class="form-group col-md-6 mt-3 mt-md-0">
+                      <label for="lastname">Last Name</label>
+                      <input type="text" class="form-control gray" name="lastname" id="lastname"
+                        value="<%= user.lastname %>" readonly>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="row">
+                    <div class="form-group col-md-6 mt-3 mt-md-0">
+                      <label for="license_number">License Number</label>
+                      <input type="text" class="form-control gray" name="license_number" id="license_number"
+                        value="<%= user.license_number %>" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="age">Age</label>
+                      <input type="number" name="age" class="form-control gray" id="age" value="<%= user.age %>" readonly>
+                    </div>
+
+                  </div><br>
+                  <div class="row">
+                    <b>
+                      <p>CAR DETAILS:</p>
+                    </b>
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="make">Make</label>
+                      <input type="text" name="make" class="form-control" id="make" value="<%= user.car_details.make %>"
+                        required>
+                    </div>
+                    <div class="form-group col-md-6 mt-3 mt-md-0">
+                      <label for="model">Model</label>
+                      <input type="text" class="form-control" name="model" id="model"
+                        value="<%= user.car_details.model %>" required>
+                    </div>
+                  </div><br>
+
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="year">Year</label>
+                      <input type="number" name="year" class="form-control" id="year" value="<%= user.car_details.year %>"
+                        required>
+                    </div>
+                    <div class="form-group col-md-6 mt-3 mt-md-0">
+                      <label for="plate">Plate Number</label>
+                      <input type="text" class="form-control" name="plate" id="plate"
+                        value="<%= user.car_details.plate %>" required>
+                    </div>
+                  </div><br>
+
+                  <div class="text-center"><button type="submit">Update Car Details</button></div>
+                </form>
+                <% } else if (typeof userNotFound !=='undefined' && userNotFound){ %>
+                  <section id="contact" class="contact">
+                    <div class="container">
+                      <div class="section-title">
+                        <h2>User Not Found</h2>
+                        <div class="text-center"><a href="/g2_test"><button type="submit" class="book_g2">Book Drive
+                              Test</button></a></div>
+                      </div>
+                    </div>
+                  </section>
+                  <% } %>
+            </div>
+          </div>
+        </section>
+        </div>
+        <!-- End Contact Section -->
+      </main>
+      <!-- End #main -->
+      <!-- ======= Footer ======= -->
+      <%- include('layouts/footer'); -%>
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+        <!-- Vendor JS Files -->
+        <%- include('layouts/scripts'); -%>
+  </body>
+
+</html>
