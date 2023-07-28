@@ -1,5 +1,4 @@
 // Name: Harsha Vardhini Thirumoorthy 
-// Student Num: 8847377 
 
 const express = require('express')
 const path = require('path')

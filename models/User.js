@@ -1,5 +1,4 @@
 // Name: Harsha Vardhini Thirumoorthy 
-// Student Num: 8847377 
 
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
