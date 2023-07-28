@@ -1491,3 +1491,9 @@ section {
 #footer .credits {
   font-size: 13px;
 }
+
+/* Custom CSS */
+
+.signUpcss .form-group{
+  width: 100%;
+}

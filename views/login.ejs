@@ -17,30 +17,41 @@
                         <div class="section-title">
                             <h2>Welcome Back!</h2>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-3 mt-1 mt-lg-0 d-flex align-items-stretch">
+                        <!-- Display error message -->
+
+                        <% if (typeof message !=='undefined' ) { %>
+                            <div class="alert alert-danger mt-3" role="alert">
+                                <%= message %>
                             </div>
-                            <div class="col-lg-6 mt-3 mt-lg-0 d-flex align-items-stretch">
-                                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for="email">Email</label>
-                                            <input type="email" name="email" class="form-control" id="email" required>
-                                        </div>
-                                        <div class="form-group col-md-6 mt-3 mt-md-0">
-                                            <label for="pwd">Password</label>
-                                            <input type="password" class="form-control" name="pwd" id="pwd" required>
-                                        </div>
+                            <% } %>
+                                <div class="row">
+                                    <div class="col-lg-3 mt-1 mt-lg-0 d-flex align-items-stretch">
                                     </div>
-                                    <br>
-                                    <div class="text-center"><button type="submit">Login</button></div>
-                                </form>
-                            </div>
-                            <div class="col-lg-3 mt-1 mt-lg-0 d-flex align-items-stretch">
-                            </div>
-                        </div>
+                                    <div class="col-lg-6 mt-3 mt-lg-0 d-flex align-items-stretch">
+                                        <form action="/users/login" method="post" role="form" class="php-email-form">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="username">Username</label>
+                                                    <input type="text" name="username" class="form-control"
+                                                        id="username" required>
+                                                </div>
+                                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" class="form-control" name="password"
+                                                        id="password" required>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="text-center"><button type="submit">Login</button></div>
+                                        </form>
+                                    </div>
+                                    <div class="col-lg-3 mt-1 mt-lg-0 d-flex align-items-stretch">
+                                    </div>
+                                </div>
                     </div>
                 </section><!-- End Contact Section -->
+
+
             </main><!-- End #main -->
             <!-- ======= Footer ======= -->
             <%- include('layouts/footer'); -%>

@@ -1,0 +1,92 @@
+<!-- Name: Harsha Vardhini Thirumoorthy -->
+<!-- Student Num: 8847377 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Header -->
+<%- include('layouts/header'); -%>
+
+    <body>
+        <!-- Navbar -->
+        <%- include('layouts/navbar'); -%>
+            <main id="main">
+                <!-- ======= Contact Section ======= -->
+                <section id="contact" class="contact">
+                    <div class="container">
+                        <div class="section-title">
+                            <h2>Sign Up</h2>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 mt-1 mt-lg-0 d-flex align-items-stretch">
+                            </div>
+                            <% if(errors !=null && errors.length> 0 ) { %>
+                                <ul class="list-group">
+                                    <% for (var i=0; i < errors.length; i++) { %>
+                                        <li class="list-group-item list-group-item-danger">
+                                            <%= errors[i] %>
+                                        </li>
+                                        <% } %>
+                                </ul>
+                                <% } %>
+                                    <div class="col-lg-6 mt-3 mt-lg-0 d-flex align-items-stretch">
+                                        <form action="/users/signup" method="post" role="form"
+                                            class="php-email-form signUpcss">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="username">Username</label>
+                                                    <input type="text" name="username" class="form-control"
+                                                        id="username" value="<%= username %>">
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" class="form-control" name="password"
+                                                        id="password" value="<%= password %>">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                                    <label for="confirmPassword">Confirm Password</label>
+                                                    <input type="password" class="form-control" name="confirmPassword"
+                                                        id="confirmPassword">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="form-group col-md-6 mt-3 mt-md-0">
+                                                    <label for="usertype">User type</label>
+                                                    <select name="usertype" id="usertype" class="form-control">
+                                                        <option value="" selected disabled>Select user type</option>
+                                                        <option value="Driver">Driver</option>
+                                                        <option value="Examiner">Examiner</option>
+                                                        <option value="Admin">Admin</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="text-center"><button type="submit">Sign up</button><br><br>
+                                                <p>Already have an account? <a href="/login">Login</a></p>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="col-lg-3 mt-1 mt-lg-0 d-flex align-items-stretch">
+                                    </div>
+                        </div>
+                    </div>
+                </section><!-- End Contact Section -->
+            </main><!-- End #main -->
+            <!-- ======= Footer ======= -->
+            <%- include('layouts/footer'); -%>
+                <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                        class="bi bi-arrow-up-short"></i></a>
+                <!-- Vendor JS Files -->
+                <%- include('layouts/scripts'); -%>
+    </body>
+
+</html>

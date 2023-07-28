@@ -7,11 +7,54 @@ const ejs = require('ejs')
 const app = express()
 const mongoose = require('mongoose')
 const User = require('./models/User')
+const expressSession = require('express-session')
+const flash = require('connect-flash')
 
+//controller files
+const homeController = require('./controllers/home')
+const g2_testController = require('./controllers/g2_test')
+const g_testController = require('./controllers/g_test')
+const loginController = require('./controllers/login')
+const loginUserController = require('./controllers/loginUser')
+const newUserController = require('./controllers/newUser')
+const getUserDetailsController = require('./controllers/getUserDetails')
+const updateCarDetailsController = require('./controllers/updateCarDetails')
+const signupController = require('./controllers/signup')
+const signupUserController = require('./controllers/signupUser')
+const logoutController = require('./controllers/logout')
+
+//custom middleware
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticated')
+const checkUserTypeDriverMiddleware = require('./middleware/checkUserTypeDriver')
+
+// In-built middleware
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded())
 app.set('view engine', 'ejs')
+app.use(flash())
+
+app.use(expressSession({
+    secret: 'love express'
+}))
+
+//for navbar control
+global.loggedIn = null
+
+app.use("*", async (req, res, next) => {
+
+    loggedIn = req.session.userId
+    if (loggedIn) {
+        // Find the user in the database based on the user ID
+        const user = await User.findById(loggedIn);
+        //pass the userType as a local variable
+        res.locals.userType = user ? user.usertype : null;
+    } else {
+        res.locals.userType = null;
+    }
+    next()
+})
+
 // create server
 app.listen(1111, () => {
     console.log('App is listening at port no 1111')
@@ -20,98 +63,38 @@ app.listen(1111, () => {
 mongoose.connect('mongodb+srv://admin:admin@cluster0.1pbbwjd.mongodb.net/driveTest?retryWrites=true&w=majority')
 
 //route index
-app.get('/', async (req, res) => {    
-    try {
-        const users = await User.find({})
-        res.render('index', {
-            users
-        })
-    } catch (error) {
-        console.log(error)
-    }
-})
+app.get('/', homeController)
 
 //route g2_test
-app.get('/g2_test', (req, res) => {
-    res.render('g2_test')
-})
-
+app.get('/g2_test', checkUserTypeDriverMiddleware, g2_testController)
 
 //route g_test
-app.get('/g_test', (req, res) => {
-    res.render('g_test')
-})
+app.get('/g_test', checkUserTypeDriverMiddleware, g_testController)
 
 //route login
-app.get('/login', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'post.html'))
-    res.render('login')
-})
+app.get('/login', redirectIfAuthenticatedMiddleware, loginController);
+
+//login user
+app.post('/users/login', redirectIfAuthenticatedMiddleware, loginUserController)
+
+app.get('/auth/login', redirectIfAuthenticatedMiddleware, loginController)
 
 //create new user in user collection
-app.post('/users/store', async (req, res) => {
-    try {
-        const { firstname, lastname, license_number, age, make, model, year, plate } = req.body;
-
-        await User.create({
-            firstname,
-            lastname,
-            license_number,
-            age,
-            car_details: {
-                make: make,
-                model: model,
-                year: year,
-                plate: plate
-            }
-        });
-        res.redirect('/g_test');
-
-    } catch (error) {
-        console.log(error)
-    }
-})
+app.post('/users/store', newUserController)
 
 //fetch the user details from user collection
-app.post('/g_test', async (req, res) => {
-    try {
-        const user = await User.findOne({ license_number: req.body.license });
-        if (user) {
-            res.render('g_test', { user });
+app.post('/g_test', getUserDetailsController);
 
-        } else {
-            res.render('g_test', { userNotFound: true });
-        }
-    } catch (error) {
-        console.log(error);
-        res.redirect('/g_test');
-    }
-});
+//update car details
+app.post('/updateCarDetails', updateCarDetailsController)
 
-//update user details
-app.post('/updateCarDetails', async (req, res) => {
-    try {
-        const { license_number, make, model, year, plate } = req.body;
-        const user = await User.findOne({ license_number: license_number });
-        if (user) {
+//signup
+app.get('/signup', redirectIfAuthenticatedMiddleware, signupController)
 
-            if (
-                user.car_details.make !== make ||
-                user.car_details.model !== model ||
-                user.car_details.year !== year ||
-                user.car_details.plate !== plate
-            ) {
-                // update car details in the database
-                user.car_details.make = make;
-                user.car_details.model = model;
-                user.car_details.year = year;
-                user.car_details.plate = plate;
-                user.save();
-            }
-            res.redirect('/g_test');
-        }
-    } catch (error) {
-        console.log(error)
-    }
-})
+//signup user
+app.post('/users/signup', signupUserController)
+
+//
+app.get('/auth/logout', logoutController)
+app.use((req, res) => res.render('notfound'))
 
