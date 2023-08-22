@@ -17,6 +17,8 @@ module.exports = async (req, res) => {
                     username: username,
                     password: password,
                     usertype: usertype,
+                    appointmentDate: 0,
+                    appointmentTime: "default",
                     car_details: {
                         make: "default",
                         model: "default",

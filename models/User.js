@@ -22,6 +22,12 @@ const UserSchema = new Schema({
         required: [true, 'Please provide password']
     },
     usertype: String,
+    appointmentDate: {
+        type: Date
+      },
+    appointmentTime: {
+        type: String
+      },
     car_details: {
         make: String,
         model: String,

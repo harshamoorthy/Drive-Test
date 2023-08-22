@@ -1,0 +1,84 @@
+<!-- Name: Harsha Vardhini Thirumoorthy -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- ======= header ======= -->
+<%- include('layouts/header'); -%>
+
+    <body>
+        <!-- ======= Navbar ======= -->
+        <%- include('layouts/navbar'); -%>
+
+            <main id="main">
+                <!-- ======= Cta Section ======= -->
+                <section id="cta" class="cta">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9 text-center text-lg-start">
+                                <h3>Appointment</h3>
+                                <p>
+                                    Release the timeslots to be available for the drivers to book their drive test.
+                                </p>
+                            </div>
+                            <div class="col-lg-3 cta-btn-container text-center">
+                                <a class="cta-btn align-middle" href="#">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Cta Section -->
+
+                <!-- ======= Contact Section ======= -->
+                <section id="contact" class="contact">
+
+                    <div class="container">
+                        <div class="section-title">
+                            <h2>Appointment</h2>
+                            <p>
+                                Please make sure you choose right timeslots that are available.
+                            </p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 mt-10 mt-lg-0 d-flex align-items-stretch">
+                                <form id="userForm" action="/appointment/create" method="POST" role="form" class="g2_form">
+
+                                    <!-- Date picker to choose the date -->
+
+                                    <div class="form-group text-center">
+                                        <label for="appointmentDate">Select Date:</label>
+                                        <input type="date" id="appointmentDate" name="appointmentDate" required
+                                            style="width: 200px;">
+                                    </div>
+                                    <br>
+
+                                    <!-- Display the list of timeslots as checkboxes -->
+                                    <div class="form-group text-center" id="timeslotList">
+                                        <!-- Timeslots will be dynamically generated here -->
+                                    </div>
+                                    <br>
+
+                                    <!-- Button to create the timeslot -->
+                                    <div class="form-group text-center">
+                                        <button type="submit">Create Appointment</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- End Contact Section -->
+            </main>
+            <!-- End #main -->
+            <!-- ======= Footer ======= -->
+            <%- include('layouts/footer'); -%>
+                <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                        class="bi bi-arrow-up-short"></i></a>
+                <!-- Vendor JS Files -->
+                <%- include('layouts/scripts'); -%>
+                <script src="/js/appointmentTimeslot.js"></script>
+    </body>
+
+</html>

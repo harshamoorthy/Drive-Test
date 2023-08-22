@@ -6,6 +6,7 @@ const ejs = require('ejs')
 const app = express()
 const mongoose = require('mongoose')
 const User = require('./models/User')
+
 const expressSession = require('express-session')
 const flash = require('connect-flash')
 
@@ -21,10 +22,14 @@ const updateCarDetailsController = require('./controllers/updateCarDetails')
 const signupController = require('./controllers/signup')
 const signupUserController = require('./controllers/signupUser')
 const logoutController = require('./controllers/logout')
-
+const appointmentController = require('./controllers/appointment')
+const createAppointmentController = require('./controllers/createAppointment')
+const getTimeSlotsForAdminController = require('./controllers/getTimeSlotsForAdmin')
+const getBookedTimeSlotController =require('./controllers/getBookedTimeSlot')
 //custom middleware
 const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticated')
 const checkUserTypeDriverMiddleware = require('./middleware/checkUserTypeDriver')
+const checkUserTypeAdminMiddleware = require('./middleware/checkUserTypeAdmin')
 
 // In-built middleware
 app.use(express.static('public'))
@@ -92,6 +97,14 @@ app.get('/signup', redirectIfAuthenticatedMiddleware, signupController)
 
 //signup user
 app.post('/users/signup', signupUserController)
+
+app.get('/appointment',checkUserTypeAdminMiddleware, appointmentController)
+
+app.post('/appointment/create', createAppointmentController )
+
+// API route 
+app.get('/getTimeslots', getTimeSlotsForAdminController)
+app.get('/getBookedTimeslots',getBookedTimeSlotController )
 
 //
 app.get('/auth/logout', logoutController)

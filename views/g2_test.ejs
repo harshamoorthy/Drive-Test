@@ -109,6 +109,29 @@
                                             </div>
                                         </div>
                                         <br />
+                                        <div class="row">
+                                            <b>
+                                                <p>SELECT APPOINTMENT:</p>
+                                            </b>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label for="appointmentDate">Appointment Date</label>
+                                                <input type="date" name="appointmentDate" class="form-control"
+                                                    id="appointmentDate" required />
+                                            </div>
+                                        </div>
+                                        <br />
+                                      
+
+                                        <!-- Display the list of timeslots as checkboxes -->
+                                       
+                                            <div class="form-group text-center" id="availableTimeslotList">
+                                                <!-- Timeslots will be dynamically generated here -->
+                                            </div>
+                                       
+                                        <br>
 
                                         <div class="text-center">
                                             <button type="submit">Book</button>
@@ -137,6 +160,7 @@
                         class="bi bi-arrow-up-short"></i></a>
                 <!-- Vendor JS Files -->
                 <%- include('layouts/scripts'); -%>
+                <script src="/js/getAvailableTimeSlotsForDriver.js"></script>
     </body>
 
 </html>

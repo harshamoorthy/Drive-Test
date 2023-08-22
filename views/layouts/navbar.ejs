@@ -28,6 +28,9 @@
           <li><a class="nav-link scrollto active" href="/g2_test">G2_Test</a></li>
           <li><a class="nav-link scrollto active" href="/g_test">G_Test</a></li>
           <% } %>
+          <% if (loggedIn && userType === 'Admin') { %>
+          <li><a class="nav-link scrollto active" href="/appointment">Appointment</a></li>
+          <% } %>
           <% if (loggedIn) { %>
           <li><a class="nav-link scrollto active" href="/auth/logout">Logout</a></li>
           <% } %>

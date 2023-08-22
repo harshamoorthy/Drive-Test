@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = async (req, res) => {
     try {
-        const { firstname, lastname, license_number, age, make, model, year, plate } = req.body;
+        const { firstname, lastname, license_number, age, appointmentDate, appointmentTime, make, model, year, plate } = req.body;
         // Retrieve the logged-in user's _id from the session
         const userId = req.session.userId;
 
@@ -14,12 +14,15 @@ module.exports = async (req, res) => {
 
             // Update the user's details
             if (user) {
+               
                 user.firstname = firstname;
                 user.lastname = lastname;
                 // Encrypt the license_number using bcrypt
                 const hashedLicenseNumber = await bcrypt.hash(license_number, 10);
                 user.license_number = hashedLicenseNumber;
                 user.age = age;
+                user.appointmentDate = appointmentDate;
+                user.appointmentTime = appointmentTime;
                 user.car_details.make = make;
                 user.car_details.model = model;
                 user.car_details.year = year;

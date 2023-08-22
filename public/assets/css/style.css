@@ -1497,3 +1497,22 @@ section {
 .signUpcss .form-group{
   width: 100%;
 }
+
+.timeslot-container {
+  display: flex; /* Use "inline-flex" to allow flexible layout of checkboxes and labels */
+  align-items: center; /* Align checkboxes and labels vertically at the center */
+  
+}
+
+/* Add some padding between checkbox and label */
+.timeslot-container input[type="checkbox"] {
+  margin-right: 5px; /* Adjust this value to set the spacing between checkbox and label */
+}
+
+.disabled-label {
+  color: #999; /* Set the desired color for the greyed-out labels */
+}
+
+.heading-p{
+  text-align: left;
+}

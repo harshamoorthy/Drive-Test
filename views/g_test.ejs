@@ -95,6 +95,24 @@
                 </div><br>
                 <div class="row">
                   <b>
+                    <p>APPOINTMENT DETAILS:</p>
+                  </b>
+                </div>
+                
+                <div class="row">
+                  <div class="form-group col-md-6 mt-3 mt-md-0">
+                    <label for="appointmentDate">Appointment Date</label>
+                    <% const appointmentDate = new Date(user.appointmentDate); %>
+                    <% const formattedDate = appointmentDate.toISOString().slice(0, 10); %>
+                    <input type="date" class="form-control gray" name="appointmentDate" id="appointmentDate"
+                      value="<%= formattedDate %>" readonly>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="appointmentTime">Appointment Time</label>
+                    <input type="text" name="appointmentTime" class="form-control gray" id="appointmentTime" value="<%= user.appointmentTime %>" readonly>
+                  </div><br>
+                <div class="row">
+                  <b>
                     <p>CAR DETAILS:</p>
                   </b>
                 </div>
@@ -123,7 +141,7 @@
                     <input type="text" class="form-control" name="plate" id="plate"
                       value="<%= user.car_details.plate %>" required>
                   </div>
-                </div><br>
+                </div><br><br>
 
                 <div class="text-center"><button type="submit">Update Car Details</button></div>
               </form>
